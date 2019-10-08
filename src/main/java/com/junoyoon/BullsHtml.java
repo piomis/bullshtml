@@ -178,6 +178,7 @@ public class BullsHtml {
 	 * @throws IOException
 	 */
 	public void copyResources(String outputFolder) throws IOException {
+		BullsUtil.copyResource(outputFolder + "/js/jquery-3.4.1.min.js", "js_resources/jquery-3.4.1.min.js");
 		BullsUtil.copyResource(outputFolder + "/js/popup.js", "js_resources/popup.js");
 		BullsUtil.copyResource(outputFolder + "/js/sortabletable.js", "js_resources/sortabletable.js");
 		BullsUtil.copyResource(outputFolder + "/js/customsorttypes.js", "js_resources/customsorttypes.js");
@@ -270,8 +271,9 @@ public class BullsHtml {
 			srcDir.generateHtml(targetPath);
 			generateChildHtml(targetPath, srcDir);
 		}
-		generateDirListHtml(targetPath);
-		generateFileListHtml(targetPath);
+		//generateDirListHtml(targetPath);
+		//generateFileListHtml(targetPath);
+		generateDirAndFileJson(targetPath);
 		generateMainHtml(targetPath);
 	}
 
@@ -333,13 +335,13 @@ public class BullsHtml {
 	 * @param path
 	 *            output dir
 	 */
-	public void generateDirListHtml(File path) {
+	/*public void generateDirListHtml(File path) {
 		ST template = BullsUtil.getTemplate("frame_dirs");
 
 		template.add("srcDirList", getSrcDirList());
 		File nPath = new File(path, "frame_dirs.html");
 		BullsUtil.writeToFile(nPath, template.render());
-	}
+	}*/
 
 	/**
 	 * generate down left src html page
@@ -347,11 +349,26 @@ public class BullsHtml {
 	 * @param path
 	 *            output dir
 	 */
-	public void generateFileListHtml(File path) {
+	/*public void generateFileListHtml(File path) {
 		ST template = BullsUtil.getTemplate("frame_files");
 		Collections.sort(BullsHtml.srcFileList);
 		template.add("srcFileList", BullsHtml.srcFileList);
 		BullsUtil.writeToFile(new File(path, "frame_files.html"), template.render());
+	}*/
+
+	/**
+	 * generate JSON with Dirs and Files
+	 * 
+	 * @param path
+	 *            output dir
+	 */
+	public void generateDirAndFileJson(File path)
+	{
+		ST template = BullsUtil.getTemplate("statistics");
+		template.add("srcDirList", getSrcDirList());
+		Collections.sort(BullsHtml.srcFileList);
+		template.add("srcFileList", BullsHtml.srcFileList);
+		BullsUtil.writeToFile(new File(path, "statistics.json"), template.render());
 	}
 
 	/**

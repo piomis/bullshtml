@@ -27,6 +27,7 @@ import com.uwyn.jhighlight.tools.StringUtils;
 public abstract class Src {
 	public File path;
 	private String normalizedPath;
+	private String escapedPath;
 	public int functionCount;
 	public int coveredFunctionCount;
 	public int branchCount;
@@ -51,6 +52,10 @@ public abstract class Src {
 
 	public String getNormalizedName() {
 		return BullsUtil.normalizePath(this.path.getName());
+	}
+
+		public String getEscapedName() {
+		return BullsUtil.escapePath(this.path.getName());
 	}
 
 	public String getBranchCoverageString() {
@@ -138,6 +143,14 @@ public abstract class Src {
 
 	public String getNormalizedPath() {
 		return this.normalizedPath;
+	}
+
+	public void setEscapedPath(String escapedPath) {
+		this.escapedPath = escapedPath;
+	}
+
+	public String getEscapedPath() {
+		return this.escapedPath;
 	}
 
 	public boolean isSrcFile() {

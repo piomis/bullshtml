@@ -1,7 +1,7 @@
 $/header()$
 <h5>Coverage Report - $srcDir.path$ 
 $if(srcDir.worthyParent)$
-<a href="$srcDir.worthyParent.normalizedPath$.html"><img src='images/upper.png' border="0"/></a>
+<a href='#' onClick='loadSummary("$srcDir.worthyParent.escapedPath$");'><img src='images/upper.png' border="0"/></a>
 $endif$
 </h5> 
 
@@ -57,11 +57,6 @@ $if(first(srcDir.childSrcDir))$
 	}$
 	</tbody> 
 </table> 
-<script type="text/javascript"> 
-	var subDirTable = new SortableTable(document.getElementById("subDirResult"),
-    	["String", "Number", "Percentage", "Percentage"]);
-	subDirTable.sort(0);
-</script> 
 $endif$
 
 <!--- files --!>
@@ -93,10 +88,5 @@ $if(first(srcDir.childSrcFile))$
 	}$
 	</tbody> 
 </table> 
-<script type="text/javascript"> 
-	var fileListTable = new SortableTable(document.getElementById("fileList"),
-    	["String", "Number", "Percentage", "Percentage"]);
-	fileListTable.sort(0);
-</script> 
 $endif$
 $/footer()$

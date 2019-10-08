@@ -67,6 +67,30 @@ public class BullsUtil {
 	}
 
 	/**
+	 * Escape path to file form.
+	 * 
+	 * @param path
+	 * @return escaped path
+	 */
+	public static String escapePath(File path) {
+		try {
+			return escapePath(path.getCanonicalPath());
+		} catch (IOException e) {
+			return escapePath(path.getAbsolutePath());
+		}
+	}
+
+	/**
+	 * Escape all \ in path
+	 * 
+	 * @param path
+	 * @return escaped path
+	 */
+	public static String escapePath(String path) {
+		return path.replace("\\", "\\\\");
+	}
+
+	/**
 	 * Write file
 	 * 
 	 * @param path

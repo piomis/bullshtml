@@ -1,5 +1,4 @@
-$/headerforfile()$
-<h5>Coverage Report - $srcFile.path$ <a href="../$srcFile.parentDir.normalizedPath$.html"><img src='../images/upper.png' border="0"/></a></h5> 
+<h5>Coverage Report - $srcFile.path$ <a href='#' onClick='loadSummary("$srcFile.parentDir.escapedPath$");'><img src='images/upper.png' border="0"/></a></h5> 
 <br>
 <div class="separator">&nbsp;</div> 
 <table class="report" id="fileList"> 

@@ -1,4 +1,3 @@
-$/header()$
 <h5>Coverage Summary</h5>
 <div class="separator">&nbsp;</div> 
 <table class="report" id="total"> 
@@ -37,10 +36,6 @@ $/header()$
 	}$
 </tbody>
 </table>
-<script type="text/javascript"> 
-var packageTable = new SortableTable(document.getElementById("riskyFiles"),
-    ["String", "Number", "Percentage", "Percentage"]);
-</script> 
 <div class="separator">&nbsp;</div> 
 <table class="report" id="directories"> 
 <thead>
@@ -57,9 +52,4 @@ $dirList:{ eachDir |
 }$
 </tbody>
 </table>
-<script type="text/javascript"> 
-var packageTable = new SortableTable(document.getElementById("directories"),
-    ["String", "Number", "Percentage", "Percentage"]);
-
-</script> 
 $/footer()$

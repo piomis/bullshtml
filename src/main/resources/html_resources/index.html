@@ -1,25 +1,156 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<meta http-equiv="Cache-Control" content="no-store" />
+<title>Coverage Report</title> 
+<link title="Style" type="text/css" rel="stylesheet" href="css/main.css"/> 
+<link title="Style" type="text/css" rel="stylesheet" href="css/highlight.css"/> 
+<link title="Style" type="text/css" rel="stylesheet" href="css/sortabletable.css"/> 
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/popup.js"></script> 
+<script type="text/javascript" src="js/sortabletable.js"></script> 
+<script type="text/javascript" src="js/customsorttypes.js"></script> 
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=euckr"/>
-<title>Coverage Report</title>
-</head>
+<script type="text/javascript">
+<!--
+    function sharedStart(array)
+    {
+        var A= array.concat().sort(), 
+        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;
+        while(i<L && a1.charAt(i)=== a2.charAt(i))
+            i++;
+        return a1.substring(0, i);
+    }
 
-<frameset cols="20%,80%">
-	<frameset rows="40%,60%">
-		<frame src="frame_dirs.html" name="packageList" title="All Dirs"/>
-		<frame src="frame_files.html" name="sourceFileList" title="All Files)"/>
-	</frameset>
-	<frame src="frame_summary.html" name="summary" title="Package, class and interface descriptions" scrolling="yes"/>
+    function loadSummary(f)
+    {
+        f = f.replace(/[\\|:|\.]/g,'_') + '.html';
 
-	<noframes>
-		<body>
-			<p>This document is designed to be viewed using the frames feature. If you see this message, you are using a frame-incapable web client.</p>
-			<p><a href="frame-summary.html">Click here to view a non-frame version.</a></p>
-		</body>
-	</noframes>
-</frameset>
+        $("#summary").load( f, function( response, status, xhr ) {
+            if ( status == "error" )
+            {
+                var msg = "Sorry but there was an error: ";
+                $( "#summary" ).html( msg + xhr.status + " " + xhr.statusText );
+            }
 
+            var sortTable = $("table#subDirResult").get(0);
+            if( sortTable )
+            {
+                var subDirTable = new SortableTable(sortTable,
+                    ["String", "Number", "Percentage", "Percentage"]);
+                subDirTable.sort(0);
+            }
+            sortTable = $("table#fileList").get(0);
+            if( sortTable )
+            {
+                var subDirTable = new SortableTable(sortTable,
+                    ["String", "Number", "Percentage", "Percentage"]);
+                subDirTable.sort(0);
+            }
+
+            sortTable = $("table#riskyFiles").get(0);
+            if( sortTable )
+            {
+                var subDirTable = new SortableTable(sortTable,
+                    ["String", "Number", "Percentage", "Percentage"]);
+                subDirTable.sort(0);
+            }
+
+            sortTable = $("table#directories").get(0);
+            if( sortTable )
+            {
+                var subDirTable = new SortableTable(sortTable,
+                    ["String", "Number", "Percentage", "Percentage"]);
+                subDirTable.sort(0);
+            }
+        });
+
+        return false;
+    }
+
+$(document).ready( function()
+    {
+        $.getJSON( "statistics.json", function( result )
+            {
+                updateMenus(result);
+                loadSummary('frame_summary');
+            }
+        );
+    }
+);
+
+function updateMenus(jsonFile)
+{
+    var dList = $("#dirList");
+
+    let dirPaths = jsonFile.directories.map(({ path }) => path)
+    var lastBackslah = sharedStart(dirPaths).lastIndexOf('\\') + 1;
+
+    $.each(jsonFile.directories, function(i, item) 
+    {
+        var li = $('<li/>')
+        .appendTo(dList)
+
+        var a = $('<a/>')
+        .text( item.path.substring(lastBackslah) )
+        .attr('href', '#')
+        .click( function() { return loadSummary(item.path) } )
+        .appendTo(li);
+
+        var covf = $('<span/> ')
+        .addClass( 'smallcovf')
+        .text( item.covf )
+        .appendTo(li);
+        
+        var covf = $(' <span/>')
+        .text( item.covb )
+        .addClass( 'smallcovb')
+        .appendTo(li);
+    });
+
+    var fList = $("#fileList");
+
+    $.each(jsonFile.files, function(i, item) 
+    {
+        var li = $('<li/>')
+        .appendTo(fList)
+
+        var a = $('<a/>')
+        .text( item.name )
+        .attr('href', '#')
+        .click( function() { return loadSummary(item.path + '/' + item.name ) })
+        .appendTo(li);
+
+        var covf = $('<span/>')
+        .addClass( 'smallcovf')
+        .text( item.covf )
+        .appendTo(li);
+
+        var covf = $('<span/>')
+        .text( item.covb )
+        .addClass( 'smallcovb')
+        .appendTo(li);
+    });
+}
+
+-->
+</script>
+</head> 
+<body>
+<div id="directories">
+    <h5>Directories</h5>
+    <h6><a href='#' onClick='loadSummary("frame_summary");'>Overall Summary</a></h6>
+    <ul id="dirList" class="dirList">
+    </ul>
+    <span class="smallcovf">function</span> 
+    <span class="smallcovb">branch</span> 
+</div>
+<div id="files">
+    <h5>Files</h5>
+    <ul id="fileList" class="fileList">
+    </ul>
+</div>
+<div id="summary"></div>
+</body>
 </html>

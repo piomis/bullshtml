@@ -21,8 +21,14 @@ a.dfn:hover {
 	text-decoration: none;
 }
 
-body {
+html, body {
 	font-family: verdana, arial, helvetica;
+	height: 100%;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 300px auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,6 +37,31 @@ h1, h2, h3, h4, h5, h6 {
 
 h5 {
 	margin-top: 0.5em;
+}
+
+div#directories
+{
+	min-height: 50%;
+	width: 300px;
+	grid-column: 1;
+	grid-row: 1;
+}
+
+div#files
+{
+	min-height: 50%;
+	width: 300px;
+	grid-column: 1;
+	grid-row: 2;
+}
+
+div#summary
+{
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	min-height: 100%;
+	width: 1200px;
+	text-align: left;
 }
 
 div.footer {
@@ -43,7 +74,7 @@ div.percentgraph
 	background-color: #f02020;
 	border: #808080 1px solid;
 	height: 1.3em;
-	magin: 0px;
+	margin: 0px;
 	padding: 0px;
 	width: 100px;
 }
@@ -52,7 +83,7 @@ div.percentgraph div.greenbar
 {
 	background-color: #00f000;
 	height: 1.3em;
-	magin: 0px;
+	margin: 0px;
 	padding: 0px;
 }
 
@@ -60,7 +91,7 @@ div.percentgraph div.na
 {
 	background-color: #eaeaea;
 	height: 1.3em;
-	magin: 0px;
+	margin: 0px;
 	padding: 0px;
 }
 
@@ -74,6 +105,32 @@ div.percentgraph span.text
 
 div.separator {
 	height: 10px;
+}
+
+ul#dirList {
+	list-style-type: none;
+	padding-inline-start: 10px;
+}
+
+ul#fileList {
+	list-style-type: none;
+	padding-inline-start: 10px;
+}
+
+#fileList li {
+	font-size: 68%;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#dirList li {
+	font-size: 68%;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 table tr td, table tr th {
@@ -221,9 +278,13 @@ table.source tr.kwnone {
 	font-size: 7px;	
 	color:#ff5555;
 	font-style: italic;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 .smallcovb {
 	font-size: 7px;	
 	color:#5555ff;
 	font-style: italic;
+	margin-left: 5px;
+	margin-right: 5px;
 }

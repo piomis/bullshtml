@@ -31,6 +31,7 @@ import com.uwyn.jhighlight.tools.StringUtils;
  * @author JunHo Yoon (junoyoon@gmail.com)
  */
 public class SrcFile extends Src implements Comparable<SrcFile> {
+	private String parentPath;
 	public int risk;
 	public List<SrcFunction> functions = new ArrayList<SrcFunction>();
 	public List<SrcDecisionPoint> decisionPoints = new ArrayList<SrcDecisionPoint>();
@@ -63,6 +64,7 @@ public class SrcFile extends Src implements Comparable<SrcFile> {
 			e.printStackTrace();
 		}
 		this.setNormalizedPath(BullsUtil.normalizePath(this.path.getParentFile()) + "/" + BullsUtil.normalizePath(this.path.getName()));
+		this.setEscapedPath(BullsUtil.escapePath(this.path.getParentFile()) + "/" + BullsUtil.escapePath(this.path.getName()));
 		this.coveredFunctionCount = Integer.parseInt(element.getAttributeValue("fn_cov"));
 		this.functionCount = Integer.parseInt(element.getAttributeValue("fn_total"));
 		this.coveredBranchCount = Integer.parseInt(element.getAttributeValue("d_cov"));
