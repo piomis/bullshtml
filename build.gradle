@@ -7,6 +7,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
+compileJava {
+    options.compilerArgs.addAll(['--release', '8'])
+}
+
 repositories {
     jcenter()
 }
